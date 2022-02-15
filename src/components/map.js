@@ -6,7 +6,7 @@ import 'leaflet/dist/leaflet.css';
 import BaseMaps from './BaseMaps'
 
 export default function Map(props) {
-    const [center, setCenter] = useState([51.505, -0.09])
+    const [center, setCenter] = useState([51.505, -0.09]) // LONDON [51.505, -0.09]  // BRISTOL [51.4545, -2.5879]
 
     const MoveMap = () => {
         const map = useMap()

@@ -35,7 +35,8 @@ export default function UITabs(props) {
     </Tab>
     <Tab eventKey="run" title="Run" disabled={isDisabled}>
         <Card.Body>
-            <Button>Run!</Button>
+            <p>Estimated run time: {props.geojson ? (Math.round(Math.log10(props.geojson.features.length)+1)*10) : 0} mins</p>
+            <Button>Start</Button>
         </Card.Body>
     </Tab>
     </Tabs>

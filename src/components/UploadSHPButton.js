@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import * as shp from 'shpjs';
 import proj4 from "proj4";
 
-import { Button } from "react-bootstrap";
+import { Button, ProgressBar } from "react-bootstrap";
 import UploadAlert from "./UploadIssueAlert";
 import {getUpload, ab2str} from "./uploader";
 
@@ -12,6 +12,7 @@ export default function SHPUploadButton (props){
   const [uploadButtonText, setuploadButtonText] = useState("Select the Catchment or Study Area")
 
   const projectCoordsGeojson = (geojson, reproject) => {
+    var progress = 0
     for (var fid=0; fid < geojson.features.length; fid++) {
       //console.log(geojson.features[fid])
       for (var i=0; i < geojson.features[fid].geometry.coordinates.length; i++) {
@@ -25,9 +26,7 @@ export default function SHPUploadButton (props){
               geojson.features[fid].geometry.coordinates[i][j][k] = reproject.forward(geojson.features[fid].geometry.coordinates[i][j][k])
             }
           }
-          console.log("fid", fid)
-          console.log("i", i)
-          console.log("j", j)
+
           // get bbox
           if ((fid === 0) & (i === 0) & (j===0)) {
             var minlon = geojson.features[fid].geometry.coordinates[i][j][0];
@@ -41,6 +40,10 @@ export default function SHPUploadButton (props){
             maxlat = maxlat > geojson.features[fid].geometry.coordinates[i][j][1] ? geojson.features[fid].geometry.coordinates[i][j][1] : maxlat
           }
         }
+      // progress
+      progress = Math.round((fid/geojson.features.length)*100).toString()+"%"
+      console.log(progress)
+      setuploadButtonText(progress)
       // assign bbox
       geojson.features[fid].geometry.bbox = [minlon, minlat, maxlon, maxlat]
       }
