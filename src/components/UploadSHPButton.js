@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useRef} from "react";
 //import shp from "shpjs";
 import * as shp from 'shpjs';
 import proj4 from "proj4";
@@ -10,8 +10,10 @@ import {getUpload, ab2str} from "./uploader";
 export default function SHPUploadButton (props){
   const [showAlert, setShowAlert] = useState(false);
   const [uploadButtonText, setuploadButtonText] = useState("Select the Catchment or Study Area")
+  
+  // const uploadButtonText1 = useRef("Select the Catchment or Study Area")
 
-  const projectCoordsGeojson = (geojson, reproject) => {
+  const projectCoordsGeojson = async (geojson, reproject) => {
     var progress = 0
     for (var fid=0; fid < geojson.features.length; fid++) {
       //console.log(geojson.features[fid])
@@ -43,6 +45,7 @@ export default function SHPUploadButton (props){
       // progress
       progress = Math.round((fid/geojson.features.length)*100).toString()+"%"
       console.log(progress)
+      // uploadButtonText1.current = progress
       setuploadButtonText(progress)
       // assign bbox
       geojson.features[fid].geometry.bbox = [minlon, minlat, maxlon, maxlat]
@@ -68,7 +71,7 @@ export default function SHPUploadButton (props){
       // HANDLE prj
       uploaded['prj'].content = ab2str(uploaded['prj'].content)
       const reproject = proj4(uploaded['prj'].content, proj4.defs('EPSG:4326'))
-      geojson = projectCoordsGeojson(geojson, reproject)
+      geojson = await projectCoordsGeojson(geojson, reproject)
 
       // set geojson
       props.setGeojson(geojson)

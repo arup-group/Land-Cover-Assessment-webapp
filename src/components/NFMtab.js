@@ -4,9 +4,6 @@ import CSVUploadButton from "./UploadCSVButton"
 import UploadAlert from "./UploadIssueAlert"
 
 export default function NFMtab (props) {
-    const [shpDDtext, setShpDD] = useState("")
-    const [csvDDtext, setCsvDD] = useState("")
-    const [nfmDDtext, setNfmDD] = useState("")
     const [colsMatch, setColsMatch] = useState(false)
 
     const get2DarrCol = (matrix, col) =>{
@@ -42,8 +39,8 @@ export default function NFMtab (props) {
         Object.values(props.csv.content[0]).map(csvcol=> {
             Object.keys(props.geojson.features[0].properties).map(shpcol => {
                 if (doColsMatch(shpcol, csvcol)) {
-                    setCsvDD(csvcol)
-                    setShpDD(shpcol)
+                    props.setCsvDD(csvcol)
+                    props.setShpDD(shpcol)
                 }
             })
         })
@@ -51,9 +48,9 @@ export default function NFMtab (props) {
 
 
     useEffect(() => {
-        if (props.geojson != null && props.csv != null) {setNfmDD(props.csv.content[0][1]); pairCols()}
-        else if (props.geojson) {setShpDD(Object.keys(props.geojson.features[0].properties)[0])}
-        else if (props.csv) {setCsvDD(props.csv.content[0][0]); setNfmDD(props.csv.content[0][1]) }
+        if (props.geojson != null && props.csv != null) {props.setNfmDD(props.csv.content[0][1]); pairCols()}
+        else if (props.geojson) { props.setShpDD(Object.keys(props.geojson.features[0].properties)[0])}
+        else if (props.csv) { props.setCsvDD(props.csv.content[0][0]);  props.setNfmDD(props.csv.content[0][1]) }
     }, [props.geojson, props.csv]);
 
     if (props.geojson != null & props.csv == null){
@@ -70,8 +67,8 @@ export default function NFMtab (props) {
             <div class="col">
             SHP attribute
             <DropdownButton
-            title={shpDDtext}
-            onSelect={e=>{setShpDD(e); console.log(e); doColsMatch(e, csvDDtext)}}
+            title={props.shpDD}
+            onSelect={e=>{props.setShpDD(e); console.log(e); doColsMatch(e, props.csvDD)}}
             key={'SHPdropdown'}
             id={'SHPdropdown'}>
             {Object.keys(props.geojson.features[0].properties).map(key => (
@@ -84,8 +81,8 @@ export default function NFMtab (props) {
         <div class="col">
             CSV attribute
             <DropdownButton
-            title={csvDDtext}
-            onSelect={e=>{setCsvDD(e); doColsMatch(shpDDtext, e)}}
+            title={props.csvDD}
+            onSelect={e=>{props.setCsvDD(e); doColsMatch(props.shpDD, e)}}
             key={'CSVdropdown'}
             id={'CSVdropdown'}>
             {Object.values(props.csv.content[0]).map(val=> (
@@ -96,8 +93,8 @@ export default function NFMtab (props) {
         <div class="col">
             NFM measure
             <DropdownButton
-            title={nfmDDtext}
-            onSelect={e=>setNfmDD(e)}
+            title={props.nfmDD}
+            onSelect={e=>props.setNfmDD(e)}
             key={'NFMdropdown'}
             id={'NFMdropdown'}>
             {Object.values(props.csv.content[0]).map(val => (

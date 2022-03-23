@@ -17,7 +17,7 @@ export default function InfoPage(){
             <div/>
             <Image style={{height:'auto',width:'100%'}} rounded fluid src={process.env.PUBLIC_URL+"/ExampleCatchment.jpg"}/>
             <div/>
-            <p>If you are making an assessment for baseline landcover and resultant landcover following NFM implimentation, this shapefile will be the fishnet grid.</p>
+            <p>If you are making an assessment for baseline landcover and resultant landcover following NFM implementation, this shapefile will be the fishnet grid.</p>
             <div/>
             <Image rounded fluid src={process.env.PUBLIC_URL+"/ExampleGrid.jpg"}/>
 
@@ -52,7 +52,7 @@ export default function InfoPage(){
           <Accordion.Header>NFM tab?</Accordion.Header>
           <Accordion.Body>
           <div/>
-          <p>NFM is <b>Natural Flood Management.</b> This tab enables a user to assess land cover change after NFM measures are implimented.</p>
+          <p>NFM is <b>Natural Flood Management.</b> This tab enables a user to assess land cover change after NFM measures are implemented.</p>
           <div/>
           <p>Start by uploading an NFM csv. This must contain two columns, <b>selected NFM measure</b> and the <b>OID of the feature in the study grid.</b> </p>    
           <div/>

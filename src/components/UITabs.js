@@ -5,8 +5,11 @@ import OptionsForm from "./OptionsForm";
 import SHPUploadButton from "./UploadSHPButton";
 import CSVUploadButton from "./UploadCSVButton"
 import NFMtab from "./NFMtab";
+import { setSourceMapRange } from "typescript";
+import { Alert } from "bootstrap";
 
 export default function UITabs(props) {
+    const [message, setMessage] = useState("")
 
     var isDisabled = true
     if (props.geojson){
@@ -31,12 +34,18 @@ export default function UITabs(props) {
             </Card>
     </Tab>
     <Tab eventKey="nfm" title="NFM" disabled={isDisabled}>
-        <NFMtab csv={props.csv} setCSV={props.setCSV} geojson={props.geojson} setShowModal={props.setShowModal}/>
+        <NFMtab csv={props.csv} setCSV={props.setCSV} geojson={props.geojson} setShowModal={props.setShowModal}
+        shpDD={props.shpDD}
+        csvDD={props.csvDD}
+        nfmDD={props.nfmDD}       
+        setShpDD={props.setShpDD}
+        setCsvDD={props.setCsvDD}
+        setNfmDD={props.setNfmDD}  />
     </Tab>
     <Tab eventKey="run" title="Run" disabled={isDisabled}>
         <Card.Body>
-            <p>Estimated run time: {props.geojson ? (Math.round(Math.log10(props.geojson.features.length)+1)*10) : 0} mins</p>
-            <Button>Start</Button>
+            <p>{message}</p>
+            <Button onClick={()=>{props.PostGEOJSON(props.geojson, props.csv, props.APIlist, props.nfmDD, props.csvDD, props.shpDD, props.setGeojson, props.setShowModal); setMessage("running...")}}>Start</Button>
         </Card.Body>
     </Tab>
     </Tabs>

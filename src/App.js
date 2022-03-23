@@ -9,11 +9,15 @@ import PostGEOJSON from './components/PostGEOJSON'
 import APIlist from "./assets/APIsList.json"
 
 
+
 function App() {
   const [geojson, setGeojson] = useState(null)
   const [csv, setCSV] = useState(null)
 
-  const [run, setRun] = useState(false) // RUN THE THING!!
+  const [shpDD, setShpDD] = useState("")
+  const [csvDD, setCsvDD] = useState("")
+  const [nfmDD, setNfmDD] = useState("")
+
   const [checkedState, setCheckedState] = useState(
     new Array(APIlist.length).fill(true)
   )
@@ -31,7 +35,9 @@ function App() {
   console.log(filteredAPIlist)
   return (
     <>
-    <UImodal setGeojson={setGeojson} geojson={geojson} setCSV={setCSV} csv={csv} APIlist={APIlist} changeChecked={changeChecked} />
+    <UImodal setGeojson={setGeojson} geojson={geojson} setCSV={setCSV} csv={csv} APIlist={APIlist} changeChecked={changeChecked}
+            shpDD={shpDD} csvDD={csvDD} nfmDD={nfmDD} setShpDD={setShpDD} setCsvDD={setCsvDD} setNfmDD={setNfmDD}
+            PostGEOJSON={PostGEOJSON}/>
     <Map geojson={geojson}/>
     </>
   );

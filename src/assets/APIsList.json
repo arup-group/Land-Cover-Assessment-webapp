@@ -9,36 +9,28 @@
         "endpoint": "https://environment.data.gov.uk/arcgis/rest/services/EA/WFDGroundwaterBodiesCycle2/FeatureServer",
         "layer": {"id":"0","field":"wb_name"}
     },
-	{   
-        "name": "Natural England Peat Map",
-        "endpoint": "https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/Moorland_Deep_Peat_AP_Status_England/FeatureServer",
-        "layer": {"id":"0", "field":"PCLASSDESC"}
-    },
-    {
-        "name": "Environment Agency WFD Groundwater data",
-        "endpoint": "https://environment.data.gov.uk/arcgis/rest/services/EA/WFDGroundwaterBodiesCycle2/FeatureServer",
-        "layer": {"id":"0","field":"wb_name"}
-    },
-    {
-        "name": "Natural England Ancient Woodland Inventory",
-        "endpoint": "https://environment.data.gov.uk/arcgis/rest/services/NE/AncientWoodlandEngland/FeatureServer",
-        "layer": {"id":"0", "field":"theme"}
-    },
 	{
-        "name": "Environment Agency Main Rivers",
-        "endpoint": "https://environment.data.gov.uk/arcgis/rest/services/EA/StatutoryMainRiverMap/FeatureServer",
-        "layer":{"id":"0","field":"status"}
-    },
-    {   
-        "name":  "Natural England SSSI",
-        "endpoint":"https://environment.data.gov.uk/arcgis/rest/services/NE/SitesOfSpecialScientificInterestEngland/FeatureServer",
-        "layer": {"id":"0", "field":"objectid"}
-    },
-	    {
-        "name": "Natural England Habitat Inventory",
-        "endpoint":"https://environment.data.gov.uk/arcgis/rest/services/NE/PriorityHabitatInventoryCentral/FeatureServer",
-        "layer": {"id":"0","field":"main_habit"}
-    }
+		"name": "Natural England Habitat Inventory",
+		"endpoint":["https://environment.data.gov.uk/arcgis/rest/services/NE/PriorityHabitatInventoryCentral/FeatureServer",
+					"https://environment.data.gov.uk/arcgis/rest/services/NE/PriorityHabitatInventorySouth/FeatureServer",
+					"https://environment.data.gov.uk/arcgis/rest/services/NE/PriorityHabitatInventoryNorth/FeatureServer"],
+		"layer": {"id":"0","field":"main_habit"}
+	},
+	{   
+		"name": "Natural England Peat Map",
+		"endpoint": "https://services.arcgis.com/JJzESW51TqeY9uat/arcgis/rest/services/Moorland_Deep_Peat_AP_Status_England/FeatureServer",
+		"layer": {"id":"0", "field":"PCLASSDESC"}
+	},
+	{
+		"name": "Environment Agency Main Rivers",
+		"endpoint": "https://environment.data.gov.uk/arcgis/rest/services/EA/StatutoryMainRiverMap/FeatureServer",
+		"layer":{"id":"0","field":"status"}
+	},
+	{
+		"name": "Natural England Ancient Woodland Inventory",
+		"endpoint": "https://environment.data.gov.uk/arcgis/rest/services/NE/AncientWoodlandEngland/FeatureServer",
+		"layer": {"id":"0", "field":"theme"}
+	}   
 ]      
 
 

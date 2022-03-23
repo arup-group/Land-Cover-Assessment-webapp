@@ -4,7 +4,7 @@ import {XYPlot, LineSeries, VerticalGridLines, HorizontalGridLines, XAxis, YAxis
 
 // TODO call the NFM API with geojson
 
-export default function ExportCSV(props) {
+export default function ExportCSV(geojson) {
 
   var fileHeaders =  []
   var fileData = []
@@ -15,8 +15,8 @@ export default function ExportCSV(props) {
     return headers;
   }
 
-    if (props.geojson){
-      for (const [FID, feat] of Object.entries(props.geojson.features)) {
+    if (geojson){
+      for (const [FID, feat] of Object.entries(geojson.features)) {
         const properties = {}
         for (const [header, value] of Object.entries(feat.properties)){
           fileHeaders = addHeader(fileHeaders, header)
@@ -25,17 +25,16 @@ export default function ExportCSV(props) {
         fileData.push(properties)
       }
 
-      return(<div>
-          <h3>some nice graphs here</h3>
-            <CSVDownload
-              headers={fileHeaders}
-              data={fileData}
-              fileName="results.csv"
-              target="_blank"
-            >
-              Export
-            </CSVDownload>
-        </div>)
+      return(
+        <CSVDownload
+          headers={fileHeaders}
+          data={fileData}
+          fileName="results.csv"
+          target="_blank"
+        >
+          Export
+        </CSVDownload>
+      )
     } else return null
 }
 

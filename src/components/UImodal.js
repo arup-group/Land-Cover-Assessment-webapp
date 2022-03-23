@@ -10,19 +10,26 @@ import UITabs from "./UITabs"
 import InfoPage from "./InfoPage"
 
 export default function UImodal(props) {
-    const [modalShow, setShowModal] = useState(true);
-    const [showInfo, setShowInfo] = useState(false)
+  const [modalShow, setShowModal] = useState(true);
+  const [showInfo, setShowInfo] = useState(false)
     
     var header = "Landcover Assessment"
     var icon = (<FaInfo/>)
-    var content = (<UITabs 
+    var content = (<UITabs
+      nfmDD={props.nfmDD}
+      shpDD={props.shpDD}
+      csvDD={props.csvDD} 
+      setShpDD={props.setShpDD}
+      setCsvDD={props.setCsvDD}
+      setNfmDD={props.setNfmDD}  
       setCSV={props.setCSV}
       csv={props.csv}
       APIlist={props.APIlist}
       changeChecked={props.changeChecked}
       setShowModal={setShowModal}
       setGeojson={props.setGeojson}
-      geojson={props.geojson}/>)
+      geojson={props.geojson}
+      PostGEOJSON={props.PostGEOJSON}/>)
     if (showInfo) {
       header = "Info"
       icon = (<FaUndo/>)

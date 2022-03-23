@@ -35,7 +35,17 @@ export async function getUpload(props) {
 
 
 export const ab2str = (buf) => {
-    return String.fromCharCode.apply(null, new Uint8Array(buf)); // error handling when file too big (> 150kb)
+  const chunk = 100000
+  var str, i, j, temporary 
+  if (buf.byteLength>chunk) {
+    for (i = 0, j = buf.byteLength; i < j; i += chunk) {
+      temporary = buf.slice(i, i + chunk);
+      str += String.fromCharCode.apply(null, new Uint8Array(temporary))
+    }
+  } else {
+    str = String.fromCharCode.apply(null, new Uint8Array(buf)); // error handling when file too big (> 150kb)
+  }
+  return str  
 }
 
 export function csv2arr( strData, strDelimiter ){
